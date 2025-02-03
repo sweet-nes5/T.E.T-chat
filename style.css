@@ -1,0 +1,52 @@
+#post-elm-container{
+    display: grid;
+    justify-items: center;
+
+}
+.bold-text{
+    font-weight: bold;
+}
+#post-container{
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+button{
+    padding: 6px;
+    border-radius: 15px;
+    transition: 0.25s ease;
+    border: 1px solid black;
+    
+}
+button:hover{
+    cursor: pointer;
+    background-color: gold;
+    transition: 0.25s ease;
+    color: white;
+    
+}
+#post-container > div{
+    display: grid;
+    grid-auto-flow: column;
+    gap: 150px;
+}
+#user-side{
+    width: 10vw;
+    margin-right: -50px;
+    
+}
+#upper-content-display{
+    display: grid;
+    grid-auto-flow: column;
+}
+.option-buttons{
+    color: cadetblue;
+    background-color: white;
+    border-color: white;
+    
+}
+#post-content{
+    margin-top: 60px;
+    
+}

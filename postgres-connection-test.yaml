@@ -1,0 +1,36 @@
+name: workflow postgres test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    if: contains(github.event.head_commit.message, '[DB]') || contains(github.event.head_commit.message, '[CI]') 
+    services:
+      postgres:
+        image: postgres:17.2-alpine3.21
+        env:
+          POSTGRES_USER: ${{ secrets.PG_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.PG_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.PG_DB }}
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U ${{secrets.PG_USER}} -d ${{ secrets.PG_DB }}"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v4
+
+      - name: Install PgSQL client
+        run: sudo apt-get install -y postgresql-client
+
+      - name: Test the connection
+        run: |
+          PGPASSWORD=${{ secrets.PG_PASSWORD }} psql -h localhost -U ${{ secrets.PG_USER }} -d ${{ secrets.PG_DB }} -c "SELECT 1;"

@@ -2,12 +2,12 @@ version: '3.8'
 
 services:
   postgres:
-    image: postgres: 17.2-alpine3.21
+    image: postgres:17.2-alpine3.21
     container_name: postgresdb_composed
     restart: always # to restart in case the docker crashes
     shm_size: '64mb' # limit the memory size
     cpus: "1.0"
-    emv_file:
+    env_file:
     - .env
     environment:
     - POSTGRES_USER= ${PG_USER}

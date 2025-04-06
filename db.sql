@@ -18,4 +18,3 @@ SELECT email, pwd FROM user;
 SELECT * FROM messages ORDER BY id DESC LIMIT 50;
 
 
-docker compose
